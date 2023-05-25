@@ -13,21 +13,37 @@ import ThemeContext from './context/ThemeContext'
 
 import './App.css'
 
-// Replace your code here
 class App extends Component {
-  state = {isDark: false}
+  state = {isDark: false, savedVideosList: []}
 
   onToggleTheme = () => {
     this.setState(prevState => ({isDark: !prevState.isDark}))
   }
 
+  onAddToSavedVideos = videoDetails => {
+    this.setState(prev => ({
+      savedVideosList: [...prev.savedVideosList, videoDetails],
+    }))
+  }
+
+  onRemoveSavedVideo = videoDetails => {
+    const {savedVideosList} = this.state
+    const removedList = savedVideosList.filter(
+      each => each.id !== videoDetails.id,
+    )
+    this.setState({savedVideosList: removedList})
+  }
+
   render() {
-    const {isDark} = this.state
+    const {isDark, savedVideosList} = this.state
     return (
       <ThemeContext.Provider
         value={{
           isDark,
+          savedVideosList,
           onToggleTheme: this.onToggleTheme,
+          onAddToSavedVideos: this.onAddToSavedVideos,
+          onRemoveSavedVideo: this.onRemoveSavedVideo,
         }}
       >
         <Switch>

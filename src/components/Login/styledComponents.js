@@ -24,12 +24,24 @@ export const FormCont = styled.form`
   box-shadow: 0px 8px 40px rgba(7, 7, 7, 0.08);
   min-height: 400px;
   width: 400px;
+
+  @media screen and (max-width: 768px) {
+    padding: 20px;
+    border-radius: 10px;
+    min-height: 300px;
+    width: 300px;
+  }
 `
+
 export const LoginImage = styled.img`
   height: 40px;
   width: 150px;
   align-self: center;
   margin-bottom: 30px;
+  @media screen and (max-width: 768px) {
+    height: 30px;
+    width: 120px;
+  }
 `
 export const LabelEl = styled.label`
   color: ${props => (props.isDark ? '#f9f9f9' : '#475569')};
@@ -64,4 +76,5 @@ export const LoginBtn = styled.button`
 export const ErrorMsg = styled.p`
   color: #ff0b37;
   font-size: 12px;
+  font-weight: 600;
 `
