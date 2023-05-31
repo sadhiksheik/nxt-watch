@@ -42,7 +42,7 @@ export const FailHead = styled.h1`
   font-size: 24px;
   font-weight: bold;
 `
-export const FailedPAra = styled.h1`
+export const FailedPAra = styled.p`
   color: ${props => (props.isDark ? ' #475569' : ' #475569')};
   font-size: 18px;
 `
@@ -101,6 +101,7 @@ export const TrendVideoContUl = styled.div`
 `
 export const LiEl = styled.div`
   display: flex;
+  flex-direction: row;
   list-style-type: none;
   margin-bottom: 20px;
   @media screen and (max-width: 576px) {
@@ -141,7 +142,7 @@ export const ParasCont = styled.div`
   display: flex;
   flex-direction: column;
 `
-export const TitleHead = styled.h1`
+export const TitleHead = styled.p`
   color: ${props => (props.isDark ? '#f1f5f9' : '#0f0f0f')};
   font-size: 20px;
   font-weight: 500;
@@ -169,4 +170,7 @@ export const ViewsDatePara = styled.p`
 `
 export const LinkEl = styled(Link)`
   text-decoration: none;
+`
+export const ViewsContainer = styled.div`
+  display: flex;
 `

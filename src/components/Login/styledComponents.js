@@ -66,7 +66,7 @@ export const CheckCont = styled.div`
   margin-bottom: 10px;
 `
 export const LoginBtn = styled.button`
-  color: white;
+  color: #ffffff;
   font-size: 18px;
   padding: 10px;
   background-color: #4f46e5;

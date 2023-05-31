@@ -27,11 +27,11 @@ const VideoThumbNail = props => {
         const {isDark} = value
 
         return (
-          <LiElement>
+          <LiElement key={id}>
             <LinkEl to={`/videos/${id}`}>
               <ThumbNail src={thumbNailUrl} alt="video thumbnail" />
               <VideoDetailsCont>
-                <Profile src={channel.profileImageUrl} alt={channel.name} />
+                <Profile src={channel.profileImageUrl} alt="channel logo" />
                 <DetailsCont>
                   <TittlePara isDark={isDark}>{tittle}</TittlePara>
                   <ChannelTittlePara isDark={isDark}>

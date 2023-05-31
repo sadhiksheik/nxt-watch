@@ -60,11 +60,11 @@ class Header extends Component {
                 </Link>
                 <InnerCont>
                   {isDark ? (
-                    <ThemeBtn onClick={onThemeChanged}>
+                    <ThemeBtn data-testid="theme" onClick={onThemeChanged}>
                       <DarkImg src="https://assets.ccbp.in/frontend/react-js/light-theme-img.png" />
                     </ThemeBtn>
                   ) : (
-                    <ThemeBtn onClick={onThemeChanged}>
+                    <ThemeBtn data-testid="theme" onClick={onThemeChanged}>
                       <FaMoon size={20} />
                     </ThemeBtn>
                   )}
@@ -93,7 +93,7 @@ class Header extends Component {
                             className="trigger-button"
                             onClick={() => close()}
                           >
-                            Close
+                            Cancel
                           </ClosePopBtn>
                           <ConfirmBtn onClick={this.onLoggingOut}>
                             Confirm
@@ -116,7 +116,7 @@ class Header extends Component {
                             className="trigger-button"
                             onClick={() => close()}
                           >
-                            Close
+                            Cancel
                           </ClosePopBtn>
                           <ConfirmBtn onClick={this.onLoggingOut}>
                             Confirm

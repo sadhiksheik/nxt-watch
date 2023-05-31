@@ -93,12 +93,9 @@ class Gaming extends Component {
 
         return (
           <FailureCont>
-            <FailImg src={failureUrl} alt="failed image" />
+            <FailImg src={failureUrl} alt="failure view" />
             <FailHead isDark={isDark}>Oops! Something Went Wrong</FailHead>
-            <FailedPAra isDark={isDark}>
-              We are having some trouble to complete your request. Please try
-              again
-            </FailedPAra>
+            <FailedPAra isDark={isDark}>We are having some trouble</FailedPAra>
             <RetryBtn type="button" onClick={this.onRetryClicked}>
               Retry
             </RetryBtn>
@@ -118,7 +115,7 @@ class Gaming extends Component {
 
           return (
             <TrendingMainCont>
-              <HeadContainer isDark={isDark}>
+              <HeadContainer data-testid="banner" isDark={isDark}>
                 <FireCont isDark={isDark}>
                   <SiYoutubegaming color="#ff0000" size={40} />
                 </FireCont>
@@ -126,13 +123,16 @@ class Gaming extends Component {
               </HeadContainer>
               <GamingUlCont>
                 {gameList.map(each => (
-                  <LinkEl to={`/videos/${each.id}`}>
-                    <LiEl>
-                      <ThumbNailImg src={each.thumbNailUrl} alt={each.tittle} />
+                  <LiEl key={each.id}>
+                    <LinkEl to={`/videos/${each.id}`}>
+                      <ThumbNailImg
+                        src={each.thumbNailUrl}
+                        alt="video thumbnail"
+                      />
                       <TitleHead isDark={isDark}>{each.tittle}</TitleHead>
                       <Viewpara>{each.viewCount} Watching Worldwide</Viewpara>
-                    </LiEl>
-                  </LinkEl>
+                    </LinkEl>
+                  </LiEl>
                 ))}
               </GamingUlCont>
             </TrendingMainCont>

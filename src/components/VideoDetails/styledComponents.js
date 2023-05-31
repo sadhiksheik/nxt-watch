@@ -50,7 +50,7 @@ export const FailHead = styled.h1`
   font-size: 24px;
   font-weight: bold;
 `
-export const FailedPAra = styled.h1`
+export const FailedPAra = styled.p`
   color: ${props => (props.isDark ? ' #475569' : ' #475569')};
   font-size: 18px;
 `
@@ -112,7 +112,7 @@ export const LikesCont = styled.div`
   }
 `
 export const LikeBtn = styled.button`
-  color: ${props => (props.isLiked ? '#2563eb ' : '#64748b ')};
+  color: ${props => (props.liked ? '#2563eb ' : '#64748b ')};
   font-size: 15px;
   border: 0px;
   background-color: transparent;
@@ -123,7 +123,7 @@ export const LikeBtn = styled.button`
   font-weight: 500;
 `
 export const DislikeBtn = styled.button`
-  color: ${props => (props.isDisliked ? '#2563eb ' : '#64748b ')};
+  color: ${props => (props.disLiked ? '#2563eb ' : '#64748b ')};
   font-size: 15px;
   border: 0px;
   background-color: transparent;
@@ -134,7 +134,7 @@ export const DislikeBtn = styled.button`
   font-weight: 500;
 `
 export const SavedBtn = styled.button`
-  color: ${props => (props.isSaved ? '#2563eb ' : '#64748b ')};
+  color: ${props => (props.isPresent ? '#2563eb ' : '#64748b ')};
   font-size: 15px;
   border: 0px;
   background-color: transparent;
@@ -195,4 +195,7 @@ export const Descri = styled.p`
     margin-left: 10px;
     font-size: 13px;
   }
+`
+export const ViewsContainer = styled.div`
+  display: flex;
 `

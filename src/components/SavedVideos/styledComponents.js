@@ -108,7 +108,7 @@ export const ParasCont = styled.div`
   display: flex;
   flex-direction: column;
 `
-export const TitleHead = styled.h1`
+export const TitleHead = styled.p`
   color: ${props => (props.isDark ? '#f1f5f9' : '#0f0f0f')};
   font-size: 20px;
   font-weight: 500;
@@ -164,4 +164,7 @@ export const NoPara = styled.p`
   @media screen and (max-width: 576px) {
     font-size: 15px;
   }
+`
+export const ViewsContainer = styled.div`
+  display: flex;
 `

@@ -26,6 +26,7 @@ import {
   NoImg,
   NoHead,
   NoPara,
+  ViewsContainer,
 } from './styledComponents'
 
 const getDateToNow = each => {
@@ -46,7 +47,7 @@ const SavedVidoes = () => (
             <SideBarCont>
               <SideBar />
             </SideBarCont>
-            <SavedCont isDark={isDark} data-testid="saved videos">
+            <SavedCont isDark={isDark} data-testid="savedVideos">
               {savedVideosList.length === 0 ? (
                 <NoVideosCont>
                   <NoImg isDark={isDark} src={NoImgUrl} alt="no saved videos" />
@@ -57,7 +58,7 @@ const SavedVidoes = () => (
                 </NoVideosCont>
               ) : (
                 <TrendingMainCont>
-                  <HeadContainer isDark={isDark}>
+                  <HeadContainer data-testid="banner" isDark={isDark}>
                     <FireCont isDark={isDark}>
                       <FaFire color="#ff0000" size={40} />
                     </FireCont>
@@ -66,7 +67,7 @@ const SavedVidoes = () => (
                   <TrendVideoContUl>
                     {savedVideosList.map(each => (
                       <LinkEl key={each.id} to={`/videos/${each.id}`}>
-                        <LiEl>
+                        <LiEl key={each.id}>
                           <ThumbNailImg
                             src={each.thumbNailUrl}
                             alt="video thumbnail"
@@ -81,10 +82,14 @@ const SavedVidoes = () => (
                                 {each.title}
                               </TitleHead>
                               <ChanelName>{each.channelName}</ChanelName>
-                              <ViewsDatePara>
-                                {each.viewCount} views . {getDateToNow(each)}{' '}
-                                ago
-                              </ViewsDatePara>
+                              <ViewsContainer>
+                                <ViewsDatePara>
+                                  {each.viewCount} views . ago
+                                </ViewsDatePara>
+                                <ViewsDatePara>
+                                  {getDateToNow(each)} ago
+                                </ViewsDatePara>
+                              </ViewsContainer>
                             </ParasCont>
                           </DetailsCont>
                         </LiEl>

@@ -80,8 +80,8 @@ class Login extends Component {
       userName,
       password,
     } = this.state
-    const jwtToken = Cookies.get('jwt_token')
 
+    const jwtToken = Cookies.get('jwt_token')
     if (jwtToken !== undefined) {
       return <Redirect to="/" />
     }
@@ -96,7 +96,7 @@ class Login extends Component {
           return (
             <LoginCont isDark={isDark}>
               <FormCont isDark={isDark} onSubmit={this.onFormSubmitted}>
-                <LoginImage src={imageUrl} alt="login" />
+                <LoginImage src={imageUrl} alt="website logo" />
 
                 <LabelEl htmlFor="userName" isDark={isDark}>
                   USERNAME

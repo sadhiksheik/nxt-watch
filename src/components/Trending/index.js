@@ -31,6 +31,7 @@ import {
   ChanelName,
   ViewsDatePara,
   LinkEl,
+  ViewsContainer,
 } from './styledComponents'
 
 const apiResultConstants = {
@@ -103,12 +104,9 @@ class Trending extends Component {
 
         return (
           <FailureCont>
-            <FailImg src={failureUrl} alt="failed image" />
+            <FailImg src={failureUrl} alt="failure view" />
             <FailHead isDark={isDark}>Oops! Something Went Wrong</FailHead>
-            <FailedPAra isDark={isDark}>
-              We are having some trouble to complete your request. Please try
-              again
-            </FailedPAra>
+            <FailedPAra isDark={isDark}>We are having some trouble</FailedPAra>
             <RetryBtn type="button" onClick={this.onRetryClicked}>
               Retry
             </RetryBtn>
@@ -135,7 +133,7 @@ class Trending extends Component {
 
           return (
             <TrendingMainCont>
-              <HeadContainer isDark={isDark}>
+              <HeadContainer data-testid="banner" isDark={isDark}>
                 <FireCont isDark={isDark}>
                   <FaFire color="#ff0000" size={40} />
                 </FireCont>
@@ -144,7 +142,7 @@ class Trending extends Component {
               <TrendVideoContUl>
                 {trendList.map(each => (
                   <LinkEl to={`/videos/${each.id}`}>
-                    <LiEl>
+                    <LiEl key={each.id}>
                       <ThumbNailImg
                         src={each.thumbNailUrl}
                         alt="video thumbnail"
@@ -157,9 +155,14 @@ class Trending extends Component {
                         <ParasCont>
                           <TitleHead isDark={isDark}>{each.tittle}</TitleHead>
                           <ChanelName>{each.channel.name}</ChanelName>
-                          <ViewsDatePara>
-                            {each.viewCount} views . {getDateToNow(each)} ago
-                          </ViewsDatePara>
+                          <ViewsContainer>
+                            <ViewsDatePara>
+                              {each.viewCount} views .
+                            </ViewsDatePara>
+                            <ViewsDatePara>
+                              {each.viewCount} {getDateToNow(each)} ago
+                            </ViewsDatePara>
+                          </ViewsContainer>
                         </ParasCont>
                       </DetailsCont>
                     </LiEl>

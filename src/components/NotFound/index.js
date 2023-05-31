@@ -30,7 +30,7 @@ const NotFound = () => (
               <NotImg src={imgUrl} alt="not found" />
               <NotHead isDark={isDark}>Page Not Found</NotHead>
               <NotPara>
-                We are sorry, the page you are requested could not be found
+                we are sorry, the page you requested could not be found.
               </NotPara>
             </NotCont>
           </BgCont>

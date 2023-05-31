@@ -34,6 +34,7 @@ import {
   Name,
   Subs,
   Descri,
+  ViewsContainer,
 } from './styledComponents'
 
 const apiResultConstants = {
@@ -49,7 +50,6 @@ class VideoDetails extends Component {
     apiStatus: apiResultConstants.initial,
     isLiked: false,
     isDisliked: false,
-    isSaved: false,
   }
 
   componentDidMount = () => {
@@ -113,7 +113,7 @@ class VideoDetails extends Component {
   }
 
   getSuccessView = () => {
-    const {videoDetails, isLiked, isDisliked, isSaved} = this.state
+    const {videoDetails} = this.state
 
     const {
       channelName,
@@ -129,27 +129,29 @@ class VideoDetails extends Component {
     const dateFromNow = formatDistanceToNow(new Date(publishedAt)).split(' ')
     const res = dateFromNow.splice(1, 2).join(' ')
 
-    const saveText = isSaved ? 'Saved' : 'Save'
-
     return (
       <ThemeContext.Consumer>
         {value => {
-          const {isDark, onAddToSavedVideos, onRemoveSavedVideo} = value
+          const {
+            isDark,
+            savedVideosList,
+            updateSave,
+            updateDisLike,
+            updateLike,
+            likedVideoList,
+            disLikedVideoList,
+          } = value
 
-          const updateVideoDetails = () => {
-            if (isSaved) {
-              onAddToSavedVideos(videoDetails)
-            } else {
-              onRemoveSavedVideo(videoDetails)
-            }
-          }
+          const isPresent = savedVideosList.find(
+            each => each.id === videoDetails.id,
+          )
+          const saveText = isPresent !== undefined ? 'Saved' : 'Save'
 
-          const onSaveClicked = () => {
-            this.setState(
-              prev => ({isSaved: !prev.isSaved}),
-              updateVideoDetails(),
-            )
-          }
+          const liked = likedVideoList.find(each => each.id === videoDetails.id)
+
+          const disLiked = disLikedVideoList.find(
+            each => each.id === videoDetails.id,
+          )
 
           return (
             <>
@@ -163,24 +165,34 @@ class VideoDetails extends Component {
               </PlayerContainer>
               <TitlePara isDark={isDark}>{title}</TitlePara>
               <ViewsLikeCont>
-                <ViewsPara>
-                  {viewCount} views . {res} ago
-                </ViewsPara>
+                <ViewsContainer>
+                  <ViewsPara>{viewCount} views .</ViewsPara>
+                  <ViewsPara>{res} ago</ViewsPara>
+                </ViewsContainer>
                 <LikesCont>
-                  <LikeBtn isLiked={isLiked} onClick={this.onLiked}>
+                  <LikeBtn
+                    liked={liked}
+                    onClick={() => updateLike(videoDetails)}
+                  >
                     <BiLike size={25} /> Like
                   </LikeBtn>
-                  <DislikeBtn isDisliked={isDisliked} onClick={this.onDisliked}>
+                  <DislikeBtn
+                    disLiked={disLiked}
+                    onClick={() => updateDisLike(videoDetails)}
+                  >
                     <BiDislike size={25} /> Dislike
                   </DislikeBtn>
-                  <SavedBtn isSaved={isSaved} onClick={onSaveClicked}>
+                  <SavedBtn
+                    isPresent={isPresent}
+                    onClick={() => updateSave(videoDetails)}
+                  >
                     <MdPlaylistAdd size={25} /> {saveText}
                   </SavedBtn>
                 </LikesCont>
               </ViewsLikeCont>
               <Line />
               <ChannelCont>
-                <ChannelLogo src={profileImageUrl} alt="profile" />
+                <ChannelLogo src={profileImageUrl} alt="channel logo" />
                 <ChannelDetailsCont>
                   <Name isDark={isDark}> {channelName}</Name>
                   <Subs isDark={isDark}>{subsCount} subscribers</Subs>
@@ -208,7 +220,7 @@ class VideoDetails extends Component {
             <FailHead isDark={isDark}>Oops! Something Went Wrong</FailHead>
             <FailedPAra isDark={isDark}>
               We are having some trouble to complete your request. Please try
-              again
+              again.
             </FailedPAra>
             <RetryBtn type="button" onClick={this.onRetryClicked}>
               Retry

@@ -1,8 +1,5 @@
 import {Component} from 'react'
 
-import {AiFillHome, AiFillDatabase} from 'react-icons/ai'
-import {FaFireAlt} from 'react-icons/fa'
-import {SiYoutubegaming} from 'react-icons/si'
 import ThemeContext from '../../context/ThemeContext'
 import {
   SideCont,
@@ -14,20 +11,26 @@ import {
   IconCont,
   IconImg,
   Para,
+  Homeicon,
+  TrendIcon,
+  GamingIcon,
+  SavedIcon,
 } from './styledComponents'
 
-// const activeTabs = {
-//   home: 'HOME',
-//   trending: 'TRENDING',
-//   gaming: 'GAMING',
-//   savedVideos: 'SAVED VIDEOS',
-// }
+const activeTabs = {
+  home: 'HOME',
+  trending: 'TRENDING',
+  gaming: 'GAMING',
+  savedVideos: 'SAVED VIDEOS',
+}
 
 class SideBar extends Component {
-  //   state = {isActive: activeTabs.home}
+  state = {isActive: activeTabs.home}
 
   render() {
-    // const {isActive} = this.state
+    const {isActive} = this.state
+    const isHome = isActive === activeTabs.home
+
     return (
       <ThemeContext.Consumer>
         {value => {
@@ -37,43 +40,26 @@ class SideBar extends Component {
             <SideCont isDark={isDark}>
               <StyledLink to="/">
                 <PathsCont>
-                  {isDark ? (
-                    <AiFillHome size={25} color="#e2e8f0" />
-                  ) : (
-                    <AiFillHome size={25} color="#181818" />
-                  )}
-
+                  <Homeicon isHome={isHome} size={25} isDark={isDark} />
                   <PathsPara isDark={isDark}>Home</PathsPara>
                 </PathsCont>
               </StyledLink>
               <StyledLink to="/trending">
                 <PathsCont>
-                  {isDark ? (
-                    <FaFireAlt size={25} color="#e2e8f0" />
-                  ) : (
-                    <FaFireAlt size={25} color="#181818" />
-                  )}
+                  <TrendIcon size={25} isDark={isDark} />
 
                   <PathsPara isDark={isDark}>Trending</PathsPara>
                 </PathsCont>
               </StyledLink>
               <StyledLink to="/gaming">
                 <PathsCont>
-                  {isDark ? (
-                    <SiYoutubegaming size={25} color="#e2e8f0" />
-                  ) : (
-                    <SiYoutubegaming size={25} color="#181818" />
-                  )}
+                  <GamingIcon size={25} isDark={isDark} />
                   <PathsPara isDark={isDark}>Gaming</PathsPara>
                 </PathsCont>
               </StyledLink>
               <StyledLink to="/saved-videos">
                 <PathsCont>
-                  {isDark ? (
-                    <AiFillDatabase size={25} color="#e2e8f0" />
-                  ) : (
-                    <AiFillDatabase size={25} color="#181818" />
-                  )}
+                  <SavedIcon size={25} isDark={isDark} />
                   <PathsPara isDark={isDark}>Saved videos</PathsPara>
                 </PathsCont>
               </StyledLink>

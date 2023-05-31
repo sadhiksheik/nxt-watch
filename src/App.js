@@ -14,7 +14,15 @@ import ThemeContext from './context/ThemeContext'
 import './App.css'
 
 class App extends Component {
-  state = {isDark: false, savedVideosList: []}
+  state = {
+    isDark: false,
+    savedVideosList: [],
+    likedVideoList: [],
+    disLikedVideoList: [],
+    isSaved: false,
+    isLiked: false,
+    isDisliked: false,
+  }
 
   onToggleTheme = () => {
     this.setState(prevState => ({isDark: !prevState.isDark}))
@@ -26,6 +34,18 @@ class App extends Component {
     }))
   }
 
+  onAddToLikedVideos = videoDetails => {
+    this.setState(prev => ({
+      likedVideoList: [...prev.likedVideoList, videoDetails],
+    }))
+  }
+
+  onAddToDislike = videoDetails => {
+    this.setState(prev => ({
+      disLikedVideoList: [...prev.disLikedVideoList, videoDetails],
+    }))
+  }
+
   onRemoveSavedVideo = videoDetails => {
     const {savedVideosList} = this.state
     const removedList = savedVideosList.filter(
@@ -34,16 +54,104 @@ class App extends Component {
     this.setState({savedVideosList: removedList})
   }
 
+  onRemoveLikedVideos = videoDetails => {
+    const {likedVideoList} = this.state
+    const removedList = likedVideoList.filter(
+      each => each.id !== videoDetails.id,
+    )
+    this.setState({likedVideoList: removedList})
+  }
+
+  onRemoveDislike = videoDetails => {
+    const {disLikedVideoList} = this.state
+    const removedListt = disLikedVideoList.filter(
+      each => each.id !== videoDetails.id,
+    )
+    this.setState({disLikedVideoList: removedListt})
+  }
+
+  updateSaveVideosList = videoDetails => {
+    const {isSaved} = this.state
+    if (isSaved) {
+      this.onRemoveSavedVideo(videoDetails)
+    } else {
+      this.onAddToSavedVideos(videoDetails)
+    }
+  }
+
+  updateLikedVideosList = videoDetails => {
+    const {isLiked} = this.state
+    if (isLiked) {
+      this.onRemoveLikedVideos(videoDetails)
+    } else {
+      this.onAddToLikedVideos(videoDetails)
+      this.setState({isDisliked: false})
+      this.onRemoveDislike(videoDetails)
+    }
+  }
+
+  updateDisLikedVideosList = videoDetails => {
+    const {isDisliked} = this.state
+    if (isDisliked) {
+      this.onRemoveDislike(videoDetails)
+    } else {
+      this.onAddToDislike(videoDetails)
+      this.setState({isLiked: false})
+      this.onRemoveLikedVideos(videoDetails)
+    }
+  }
+
+  updateSave = videoDetails => {
+    this.setState(
+      prev => ({isSaved: !prev.isSaved}),
+      this.updateSaveVideosList(videoDetails),
+    )
+  }
+
+  updateLike = videoDetails => {
+    this.setState(
+      prev => ({isLiked: !prev.isLiked}),
+      this.updateLikedVideosList(videoDetails),
+    )
+  }
+
+  updateDisLike = videoDetails => {
+    this.setState(
+      prev => ({isDisliked: !prev.isDisliked}),
+      this.updateDisLikedVideosList(videoDetails),
+    )
+  }
+
   render() {
-    const {isDark, savedVideosList} = this.state
+    const {
+      isDark,
+      savedVideosList,
+      likedVideoList,
+      disLikedVideoList,
+      isSaved,
+      isLiked,
+      isDisliked,
+    } = this.state
     return (
       <ThemeContext.Provider
         value={{
           isDark,
           savedVideosList,
+          likedVideoList,
+          disLikedVideoList,
+          isSaved,
+          isLiked,
+          isDisliked,
+          updateSave: this.updateSave,
+          updateLike: this.updateLike,
+          updateDisLike: this.updateDisLike,
           onToggleTheme: this.onToggleTheme,
           onAddToSavedVideos: this.onAddToSavedVideos,
           onRemoveSavedVideo: this.onRemoveSavedVideo,
+          onAddToLikedVideos: this.addLikedVodeo,
+          onRemoveLikedVideos: this.RemoveLikedVideo,
+          onAddToDislike: this.onAddToDislike,
+          onRemoveDislike: this.onRemoveDislike,
         }}
       >
         <Switch>

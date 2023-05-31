@@ -18,8 +18,9 @@ export const SideBarCont = styled.div`
 export const HomeCont = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: ${props => (props.isDark ? ' #181818' : '#f1f1f1')};
+  background-color: ${props => (props.isDark ? ' #181818' : '#f9f9f9')};
   height: 100vh;
+  //   f1f1f1
   width: 100%;
   font-family: 'Roboto';
   overflow-y: auto;
@@ -126,7 +127,7 @@ export const FailHead = styled.h1`
   font-size: 24px;
   font-weight: bold;
 `
-export const FailedPAra = styled.h1`
+export const FailedPAra = styled.p`
   color: ${props => (props.isDark ? ' #475569' : ' #475569')};
   font-size: 18px;
 `

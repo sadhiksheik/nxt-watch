@@ -42,7 +42,7 @@ export const FailHead = styled.h1`
   font-size: 24px;
   font-weight: bold;
 `
-export const FailedPAra = styled.h1`
+export const FailedPAra = styled.p`
   color: ${props => (props.isDark ? ' #475569' : ' #475569')};
   font-size: 18px;
 `
@@ -112,11 +112,11 @@ export const ThumbNailImg = styled.img`
   border-radius: 10px;
   @media screen and (max-width: 576px) {
     height: 220px;
-    width: 160px;
+    width: 140px;
     border-radius: 10px;
   }
 `
-export const TitleHead = styled.h1`
+export const TitleHead = styled.p`
   color: ${props => (props.isDark ? '#f1f5f9' : '#0f0f0f')};
   font-size: 16px;
   font-weight: 500;

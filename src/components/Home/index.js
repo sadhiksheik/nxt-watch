@@ -158,12 +158,9 @@ class Home extends Component {
 
         return (
           <FailureCont>
-            <FailImg src={failureUrl} alt="failed image" />
+            <FailImg src={failureUrl} alt="failure view" />
             <FailHead isDark={isDark}>Oops! Something Went Wrong</FailHead>
-            <FailedPAra isDark={isDark}>
-              We are having some trouble to complete your request. Please try
-              again
-            </FailedPAra>
+            <FailedPAra isDark={isDark}>We are having some trouble</FailedPAra>
             <RetryBtn type="button" onClick={this.onRetryClicked}>
               Retry
             </RetryBtn>
@@ -206,7 +203,7 @@ class Home extends Component {
                 </SideBarCont>
                 <HomeCont data-testid="home" isDark={isDark}>
                   {showBanner && (
-                    <BannerCont>
+                    <BannerCont data-testid="banner">
                       <LogoCancelCont>
                         <LogoImg src={imageUrl} alt="nxt watch logo" />
                         <CloseBtn
